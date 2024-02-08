@@ -18,16 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <AppMedusaProvider>
-          <body className={inter.className}>{children}</body>
-        </AppMedusaProvider>
-      </ThemeProvider>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AppMedusaProvider>{children}</AppMedusaProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
