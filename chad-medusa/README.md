@@ -13,6 +13,8 @@
 
 <h2>Development Setup</h2>
 
+Rename all the `.env.template` to `.env`
+
 <pre>
     <code>
         docker compose up # run docker container
