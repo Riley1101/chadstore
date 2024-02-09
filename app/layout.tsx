@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { AppMedusaProvider } from "@/providers/MedusaProvider";
+import { ApplicationContext } from "@/providers/ContextProvider";
+import { Header } from "@/components/Header";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +27,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AppMedusaProvider>{children}</AppMedusaProvider>
+          <AppMedusaProvider>
+            <ApplicationContext>
+              <Header />
+              {children}
+            </ApplicationContext>
+          </AppMedusaProvider>
         </ThemeProvider>
       </body>
     </html>
