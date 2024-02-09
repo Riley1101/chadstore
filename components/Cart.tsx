@@ -1,6 +1,7 @@
 import React from "react";
 import { CartItem } from "./CartItem";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useCart } from "medusa-react";
 import {
   Drawer,
   DrawerClose,
@@ -20,9 +21,7 @@ type Props = {
 };
 
 export function Cart({ isOpen, setOpen }: Props) {
-  const tmp = Array(10)
-    .fill(0)
-    .map((_, i) => i);
+  const { cart } = useCart();
   return (
     <Drawer open={isOpen} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
@@ -32,13 +31,13 @@ export function Cart({ isOpen, setOpen }: Props) {
       </DrawerTrigger>
       <DrawerContent className="border px-4 lg:px-[20%]">
         <DrawerHeader>
-          <DrawerTitle>Items </DrawerTitle>
-          <DrawerDescription>3 items</DrawerDescription>
+          <DrawerTitle>{!!!cart?.total ? "Empty cart" : "Items"}</DrawerTitle>
+          <DrawerDescription>
+            {!!!cart?.total ? "Please add items to proceed" : " 3 Items"}
+          </DrawerDescription>
         </DrawerHeader>
         <ScrollArea className="flex flex-col p-4  w-full h-[400px]">
-          {tmp.map((i) => (
-            <CartItem key={i} />
-          ))}
+          {cart?.items.map((i) => <CartItem key={i.id} />)}
           <ScrollBar />
         </ScrollArea>
         <DrawerFooter className="flex items-center flex-row ">

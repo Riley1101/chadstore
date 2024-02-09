@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useCreateLineItem } from "medusa-react";
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import React from "react";
-import { useProduct } from "medusa-react";
+import { useCart, useProduct } from "medusa-react";
+import { validateId } from "@medusajs/medusa";
 
 interface Props {
   params: {
@@ -26,8 +28,30 @@ export default function Page(props: Props) {
   const { params } = props;
   const { id } = params;
   const { product, isLoading } = useProduct(id);
+  const { cart, createCart } = useCart();
+  const createLineItem = useCreateLineItem(cart?.id as string);
+  const [selectedVariant, setSelectedVariant] = React.useState<
+    string | undefined
+  >();
+
+  const handleAddToCart = () => {
+    if (!!!cart?.id) {
+      createCart.mutate({});
+    }
+    createLineItem.mutate(
+      {
+        variant_id: selectedVariant as string,
+        quantity: 1,
+      },
+      {
+        onSuccess: ({ cart }) => {
+          console.log(cart.items);
+        },
+      },
+    );
+  };
+
   const hasVariants = !!product?.variants;
-  console.log(product);
   if (isLoading) {
     return <>Loading...</>;
   }
@@ -54,18 +78,18 @@ export default function Page(props: Props) {
 
         {hasVariants && (
           <div className="max-w-max mt-4">
-            <span className="mb-1 block text-sm">Size</span>
-            <Select>
+            <span className="mb-2 block text-sm">Available Size</span>
+            <Select
+              onValueChange={(e) => setSelectedVariant(e)}
+              value={selectedVariant}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select Size" />
               </SelectTrigger>
               <SelectContent>
                 {!!product?.variants &&
                   product?.variants.map((variant) => (
-                    <SelectItem
-                      key={variant.id}
-                      value={variant?.title as string}
-                    >
+                    <SelectItem key={variant.id} value={variant?.id as string}>
                       {variant?.title}
                     </SelectItem>
                   ))}
@@ -95,7 +119,7 @@ export default function Page(props: Props) {
           </Carousel>
         </div>
 
-        <Button>Add To Cart</Button>
+        <Button onClick={handleAddToCart}>Add To Cart</Button>
       </div>
     </div>
   );

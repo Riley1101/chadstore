@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { buttonVariants, Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -31,14 +31,13 @@ export function ProductCard({ data }: Props) {
           className="w-full object-cover aspect-square"
         />
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex justify-end">
         <Link
           href={`/product/${data.id}`}
           className={buttonVariants({ variant: "outline" })}
         >
-          Read More
+          Add to Cart
         </Link>
-        <Button>Add To Cart</Button>
       </CardFooter>
     </Card>
   );

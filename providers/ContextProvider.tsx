@@ -1,5 +1,6 @@
 "use client";
 
+import { CartProvider } from "medusa-react";
 import * as React from "react";
 
 interface Props {
@@ -7,5 +8,5 @@ interface Props {
 }
 
 export function ApplicationContext({ children }: Props) {
-  return <div>{children} </div>;
+  return <CartProvider>{children} </CartProvider>;
 }
