@@ -1,7 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import { QueryClient } from "@tanstack/react-query";
+import { CartProvider } from "medusa-react";
 import { MedusaProvider } from "medusa-react";
+
 const queryClient = new QueryClient();
 
 type Props = {
@@ -14,7 +16,7 @@ export function AppMedusaProvider({ children }: Props) {
       queryClientProviderProps={{ client: queryClient }}
       baseUrl="http://localhost:9000"
     >
-      {children}
+      <CartProvider>{children}</CartProvider>
     </MedusaProvider>
   );
 }

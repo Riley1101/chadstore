@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 
-import { useCart, useProduct } from "medusa-react";
+import { useProduct } from "medusa-react";
 
 interface Props {
   params: {
@@ -30,27 +30,11 @@ export default function Page(props: Props) {
   const [selectedVariant, setSelectedVariant] = React.useState<
     string | undefined
   >();
-  const { cart, createCart } = useCart();
-
-  function createEmptyCart() {
-    console.log(cart);
-    createCart.mutate(
-      {}, // create an empty cart
-      {
-        onSuccess: ({ cart }) => {
-          localStorage.setItem("cart_id", cart.id);
-          console.log(cart,"success")
-        },
-      },
-    );
-    console.log(cart);
-  }
-
-  function handleAddToCart() {
-    createEmptyCart();
-  }
 
   const hasVariants = !!product?.variants;
+
+  function handleAddToCart() {}
+
   if (isLoading) {
     return <>Loading...</>;
   }

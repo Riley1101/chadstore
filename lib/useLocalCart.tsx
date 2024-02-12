@@ -1,4 +1,7 @@
 import React from "react";
+import { useCart } from "medusa-react";
+import { useContext } from "react";
+import { ApplicationContext } from "@/providers/ApplicationContext";
 
 export type LocalCartProps = {
   cartId: string | null;
@@ -6,8 +9,8 @@ export type LocalCartProps = {
   cartExists: boolean;
 };
 
-export function useLocalCart(): LocalCartProps {
-  const [cartId, setCartId] = React.useState<string | null>(null);
+export function useLocalCartContext(): LocalCartProps {
+  const { cart } = useContext(ApplicationContext);
 
   React.useEffect(() => {
     const cartId = localStorage.getItem("cartId");
@@ -15,5 +18,6 @@ export function useLocalCart(): LocalCartProps {
       setCartId(cartId);
     }
   }, []);
-  return { cartId, setCartId, cartExists: cartId !== null || cartId !== "" };
+
+  return {};
 }

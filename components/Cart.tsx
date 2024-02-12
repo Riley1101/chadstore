@@ -1,7 +1,7 @@
 import React from "react";
 import { CartItem } from "./CartItem";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useCart } from "medusa-react";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import {
   Drawer,

@@ -6,7 +6,7 @@ import { Cart } from "./Cart";
 type Props = {};
 
 export function Header({}: Props) {
-  const [isCartOpen, setIsCartOpen] = React.useState(true);
+  const [isCartOpen, setIsCartOpen] = React.useState(false);
   return (
     <header className="px-4  w-full h-[3em] flex items-center border justify-between">
       <Link href={"/"}>Logo</Link>
