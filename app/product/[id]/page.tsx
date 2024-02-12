@@ -14,8 +14,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import React from "react";
-
-import { useProduct } from "medusa-react";
+import { ApplicationContext } from "@/providers/ApplicationContext";
+import { useContext } from "react";
+import { useProduct, useCreateLineItem } from "medusa-react";
 
 interface Props {
   params: {
@@ -31,9 +32,24 @@ export default function Page(props: Props) {
     string | undefined
   >();
 
+  const cartContext = useContext(ApplicationContext);
   const hasVariants = !!product?.variants;
 
-  function handleAddToCart() {}
+  const createLineItem = useCreateLineItem(cartContext?.cart?.cartId as string);
+
+  function handleAddToCart() {
+    createLineItem.mutate(
+      {
+        variant_id: selectedVariant as string,
+        quantity: 1,
+      },
+      {
+        onSuccess: ({ cart }) => {
+          console.log(cart);
+        },
+      },
+    );
+  }
 
   if (isLoading) {
     return <>Loading...</>;

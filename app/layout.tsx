@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { CartProvider } from "medusa-react";
 import { ApplicationProvider } from "@/providers/ApplicationProvider";
 import { AppMedusaProvider } from "@/providers/MedusaProvider";
 import { Header } from "@/components/Header";

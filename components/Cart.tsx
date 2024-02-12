@@ -23,6 +23,7 @@ type Props = {
 
 export function Cart({ isOpen, setOpen }: Props) {
   const { cart } = useCart();
+  console.log(cart?.items)
   return (
     <Drawer open={isOpen} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
