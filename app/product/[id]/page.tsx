@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useCreateLineItem } from "medusa-react";
 import {
   Carousel,
   CarouselContent,
@@ -15,8 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import React from "react";
+
 import { useCart, useProduct } from "medusa-react";
-import { validateId } from "@medusajs/medusa";
 
 interface Props {
   params: {
@@ -28,28 +27,28 @@ export default function Page(props: Props) {
   const { params } = props;
   const { id } = params;
   const { product, isLoading } = useProduct(id);
-  const { cart, createCart } = useCart();
-  const createLineItem = useCreateLineItem(cart?.id as string);
   const [selectedVariant, setSelectedVariant] = React.useState<
     string | undefined
   >();
+  const { cart, createCart } = useCart();
 
-  const handleAddToCart = () => {
-    if (!!!cart?.id) {
-      createCart.mutate({});
-    }
-    createLineItem.mutate(
-      {
-        variant_id: selectedVariant as string,
-        quantity: 1,
-      },
+  function createEmptyCart() {
+    console.log(cart);
+    createCart.mutate(
+      {}, // create an empty cart
       {
         onSuccess: ({ cart }) => {
-          console.log(cart.items);
+          localStorage.setItem("cart_id", cart.id);
+          console.log(cart,"success")
         },
       },
     );
-  };
+    console.log(cart);
+  }
+
+  function handleAddToCart() {
+    createEmptyCart();
+  }
 
   const hasVariants = !!product?.variants;
   if (isLoading) {
@@ -80,6 +79,7 @@ export default function Page(props: Props) {
           <div className="max-w-max mt-4">
             <span className="mb-2 block text-sm">Available Size</span>
             <Select
+              required
               onValueChange={(e) => setSelectedVariant(e)}
               value={selectedVariant}
             >
