@@ -2,6 +2,7 @@ import type { Product, StoreGetProductsParams } from "@medusajs/medusa";
 
 import { medusaClient } from "./medusa/config";
 import { getRegions } from "@/app/actions";
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 
 /**
  *  Empty response object for empty data
@@ -50,4 +51,16 @@ export async function getProductList({
     .catch((e) => {
       throw e;
     });
+
+  const transformedProducts = products.map((product) => {
+    return transformProductPreview(product, regions!);
+  });
+  const nextPage = count > pageParam + 1 ? pageParam + 1 : null;
+  console.log(transformedProducts);
+
+  return {
+    response: { products: transformedProducts, count },
+    nextPage,
+    queryParams,
+  };
 }
