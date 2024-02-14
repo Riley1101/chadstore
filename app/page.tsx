@@ -1,9 +1,4 @@
-import { ProductList } from "@/components/ProductList";
 
-export default function Home() {
-  return (
-    <main className="container mx-auto ">
-      <ProductList />
-    </main>
-  );
+export default async function Home() {
+  return <main className=""></main>;
 }
