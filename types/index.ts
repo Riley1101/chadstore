@@ -1,3 +1,0 @@
-interface Cart {
-  id: string;
-}

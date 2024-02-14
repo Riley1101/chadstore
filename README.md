@@ -1,3 +1,5 @@
+# Medusa Example with React Server Components
+
 This is a Next.js Application with Shadcn and Medusa integration
 
 ## Getting Started

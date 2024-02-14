@@ -1,4 +1,6 @@
 import { Region } from "@medusajs/medusa";
+import { Image as MedusaImage } from "@medusajs/medusa";
+import Image from "next/image";
 import React from "react";
 import { getProductByHandle } from "@/lib/getProducts";
 import LocalizedLink from "@/lib/components/LocalizedLink";
@@ -77,7 +79,8 @@ function ProductInfo({ product }: { product: PricedProduct }) {
 function ProductTabs({ product }: { product: PricedProduct }) {
   return (
     <div className="mt-4">
-      <h2 className="text-xl">Product Information</h2>
+    <ProductGallery images={product?.images || []} />
+      <h2 className="text-xl my-4">Product Information</h2>
       <ProductInfoTab product={product} />
       <h2 className="text-xl">Shipping & Returns</h2>
       <ShippingInfo />
@@ -85,7 +88,7 @@ function ProductTabs({ product }: { product: PricedProduct }) {
   );
 }
 
-const ProductInfoTab = ({ product }: { product: PricedProduct }) => {
+function ProductInfoTab({ product }: { product: PricedProduct }) {
   return (
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-2 gap-x-8">
@@ -125,9 +128,9 @@ const ProductInfoTab = ({ product }: { product: PricedProduct }) => {
       ) : null}
     </div>
   );
-};
+}
 
-const ShippingInfo = () => {
+function ShippingInfo() {
   return (
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-1 gap-y-8">
@@ -162,4 +165,30 @@ const ShippingInfo = () => {
       </div>
     </div>
   );
-};
+}
+
+interface GalleryProps {
+  images: MedusaImage[];
+}
+function ProductGallery({ images }: GalleryProps) {
+  return (
+    <div className="mt-4 flex gap-2">
+      {images.map((image, index) => (
+        <div
+          className="relative w-[200px] aspect-square"
+          id={image.id}
+          key={image.id}
+        >
+          <Image
+            src={image.url}
+            priority={index <= 2 ? true : false}
+            className="absolute inset-0 rounded-rounded bg-transparent"
+            alt={`Product image ${index + 1}`}
+            fill
+            sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}

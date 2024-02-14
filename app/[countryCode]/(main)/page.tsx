@@ -42,13 +42,13 @@ export default async function Home({
 }) {
   const collectionList = await getCollectionWithProducts(countryCode);
   return (
-    <main className="container mx-auto">
-      <h1>Products</h1>
+    <main className="container mx-auto py-12">
+      <h1 className="text-2xl">Products</h1>
       {collectionList?.map((collection) => {
         return (
           <div key={collection.id} className="py-4">
-            <h1 className="mb-4">{collection.title}</h1>
-            <ul className="grid grid-cols-3 gap-4">
+            <h1 className="mb-4 text-xl font-bold">{collection.title}</h1>
+            <ul className="flex flex-wrap gap-4">
               {collection.products?.map((product) => (
                 <li key={product.id}>
                   <Image
