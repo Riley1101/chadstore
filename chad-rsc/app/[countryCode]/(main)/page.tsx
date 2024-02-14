@@ -1,6 +1,7 @@
 import { getCollectionList, getProductsList } from "@/lib/getProductList";
 import { Product } from "@medusajs/medusa";
 import Image from "next/image";
+import Link from "next/link";
 
 async function getCollectionWithProducts(countryCode: string) {
   const { collections } = await getCollectionList(0, 3).then((coll) => coll);
@@ -8,7 +9,6 @@ async function getCollectionWithProducts(countryCode: string) {
     return null;
   }
   const collectionIds = collections.map((collection) => collection.id);
-
   await Promise.all(
     collectionIds.map((id) =>
       getProductsList({
@@ -29,7 +29,6 @@ async function getCollectionWithProducts(countryCode: string) {
       if (!collection) {
         return;
       }
-
       collection.products = response.products as unknown as Product[];
     }),
   );
@@ -60,6 +59,11 @@ export default async function Home({
                   />
                   <h2 className="mt-2">{product.title}</h2>
                   <p>{product.description}</p>
+                  <Link
+                    href={`/${countryCode}/${collection.handle}/${product.handle}`}
+                  >
+                    Read More
+                  </Link>
                 </li>
               ))}
             </ul>
