@@ -3,7 +3,6 @@ import type {
   ProductCollection,
   StoreGetProductsParams,
 } from "@medusajs/medusa";
-
 import { medusaClient } from "./medusa/config";
 import { getRegions } from "@/app/actions";
 import { transformProductPreview } from "./medusa/transform-products-preview";
@@ -50,7 +49,7 @@ export async function getProductsList({
   pageParam?: number;
   countryCode: string;
   queryParams?: StoreGetProductsParams;
-}) : Promise<StoreResponse>{
+}): Promise<StoreResponse> {
   const limit = queryParams?.limit || 10;
   const regions = await getRegions(countryCode);
   if (!regions) {
@@ -71,7 +70,7 @@ export async function getProductsList({
     )
     .then((res) => res)
     .catch((e) => {
-        console.log("error", e);
+      console.log("error", e);
       throw e;
     });
 

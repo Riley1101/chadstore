@@ -1,5 +1,6 @@
 import { medusaClient } from "./config";
 import { Region } from "@medusajs/medusa";
+import { cookies } from "next/headers";
 
 export type RegionInfo = Pick<
   Region,
@@ -15,3 +16,18 @@ export async function listRegions() {
     });
 }
 
+export async function getMedusaHeaders(tags: string[] = []) {
+  const headers = {
+    next: {
+      tags,
+    },
+  } as Record<string, any>;
+
+  const token = cookies().get("_medusa_jwt")?.value;
+
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+
+  return headers;
+}
