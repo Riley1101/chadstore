@@ -1,8 +1,12 @@
-import type { Product, StoreGetProductsParams } from "@medusajs/medusa";
+import type {
+  Product,
+  ProductCollection,
+  StoreGetProductsParams,
+} from "@medusajs/medusa";
 
 import { medusaClient } from "./medusa/config";
 import { getRegions } from "@/app/actions";
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import { transformProductPreview } from "./medusa/transform-products-preview";
 
 /**
  *  Empty response object for empty data
@@ -21,20 +25,38 @@ interface StoreResponse {
   queryParams?: StoreGetProductsParams;
 }
 
-export async function getProductList({
+export async function getCollectionList(
+  offset: number = 0,
+  limit: number = 100,
+): Promise<{
+  collections: ProductCollection[];
+  count: number;
+}> {
+  const collections = await medusaClient.collections
+    .list({ limit, offset }, { next: { tags: ["collections"] } })
+    .then(({ collections }) => collections)
+    .catch((err) => {
+      throw err;
+    });
+  const count = collections.length;
+  return { collections, count };
+}
+
+export async function getProductsList({
   pageParam = 0,
   queryParams,
   countryCode,
 }: {
   pageParam?: number;
-  queryParams?: StoreGetProductsParams;
   countryCode: string;
-}) {
+  queryParams?: StoreGetProductsParams;
+}) : Promise<StoreResponse>{
   const limit = queryParams?.limit || 10;
   const regions = await getRegions(countryCode);
   if (!regions) {
     return emptyResponse;
   }
+
   const { products, count } = await medusaClient.products
     .list(
       {
@@ -49,6 +71,7 @@ export async function getProductList({
     )
     .then((res) => res)
     .catch((e) => {
+        console.log("error", e);
       throw e;
     });
 
@@ -56,7 +79,6 @@ export async function getProductList({
     return transformProductPreview(product, regions!);
   });
   const nextPage = count > pageParam + 1 ? pageParam + 1 : null;
-  console.log(transformedProducts);
 
   return {
     response: { products: transformedProducts, count },

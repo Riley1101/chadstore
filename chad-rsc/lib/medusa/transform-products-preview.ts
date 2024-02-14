@@ -1,9 +1,9 @@
-import { Product, Region } from "@medusajs/medusa";
+import { Region } from "@medusajs/medusa";
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 import { CalculatedVariant, ProductPreviewType } from "./types";
-import { formatAmount } from "./currency-utils";
+import { formatAmount, getPercentageDiff } from "./currency-utils";
 
-function transformProductPreview(
+export function transformProductPreview(
   product: PricedProduct,
   region: Region,
 ): ProductPreviewType {
@@ -17,7 +17,6 @@ function transformProductPreview(
     }, variants[0]);
   }
 
-  return {
   return {
     id: product.id!,
     title: product.title!,
