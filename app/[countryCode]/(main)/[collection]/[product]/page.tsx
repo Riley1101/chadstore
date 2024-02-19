@@ -9,6 +9,7 @@ import { getMedusaHeaders } from "@/lib/medusa/utils";
 import { getRegions } from "@/app/actions";
 import { notFound } from "next/navigation";
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import ProductActions from "@/lib/components/ProductActions";
 
 type Props = {
   params: {
@@ -58,6 +59,7 @@ export default async function ProductPage({ params }: Props) {
     <div className="container mx-auto py-24">
       <ProductInfo product={product} />
       <ProductTabs product={product} />
+      <ProductActions product={product} region={region} />
     </div>
   );
 }
@@ -170,6 +172,7 @@ function ShippingInfo() {
 interface GalleryProps {
   images: MedusaImage[];
 }
+
 function ProductGallery({ images }: GalleryProps) {
   return (
     <div className="mt-4 flex gap-2">

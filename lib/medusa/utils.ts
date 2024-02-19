@@ -1,3 +1,4 @@
+"use server"
 import { medusaClient } from "./config";
 import { Region } from "@medusajs/medusa";
 import { cookies } from "next/headers";
@@ -31,3 +32,6 @@ export async function getMedusaHeaders(tags: string[] = []) {
 
   return headers;
 }
+
+export const onlyUnique = (value: unknown, index: number, self: unknown[]) =>
+  self.indexOf(value) === index
