@@ -79,7 +79,7 @@ function ProductInfo({ product }: { product: PricedProduct }) {
 function ProductTabs({ product }: { product: PricedProduct }) {
   return (
     <div className="mt-4">
-    <ProductGallery images={product?.images || []} />
+      <ProductGallery images={product?.images || []} />
       <h2 className="text-xl my-4">Product Information</h2>
       <ProductInfoTab product={product} />
       <h2 className="text-xl">Shipping & Returns</h2>
