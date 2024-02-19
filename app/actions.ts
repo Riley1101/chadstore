@@ -3,6 +3,7 @@ import { listRegions } from "@/lib/medusa/utils";
 import { Region } from "@medusajs/medusa";
 
 /**
+ * TODO : Change countryCode to enum like array
  * Retrieve a region based on country code
  * @param countryCode - The country code to retrieve the region for
  * @returns The region object
