@@ -2,7 +2,6 @@ import { Region } from "@medusajs/medusa";
 import { Image as MedusaImage } from "@medusajs/medusa";
 import Image from "next/image";
 import React from "react";
-import { getProductByHandle } from "@/lib/getProducts";
 import LocalizedLink from "@/lib/components/LocalizedLink";
 import { medusaClient } from "@/lib/medusa/config";
 import { getMedusaHeaders } from "@/lib/medusa/utils";
@@ -10,6 +9,7 @@ import { getRegions } from "@/app/actions";
 import { notFound } from "next/navigation";
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 import ProductActions from "@/lib/components/ProductActions";
+import { getProductByHandle } from "@/lib/medusa/products/actions";
 
 type Props = {
   params: {

@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 import { ProductOption, Region } from "@medusajs/medusa/dist/models";
-import { onlyUnique } from "../medusa/utils";
 import { useParams } from "next/navigation";
 import { isEqual } from "../utils";
 import { addToCart } from "../medusa/cart/actions";
@@ -88,7 +87,6 @@ export default function ProductActions({ product }: Props) {
     const newOptions = { [option.id]: value };
     updateOptions(newOptions);
   }
-
 
   return (
     <div>

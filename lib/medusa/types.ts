@@ -1,4 +1,4 @@
-import type { ProductVariant } from "@medusajs/medusa";
+import type { Cart, ProductVariant } from "@medusajs/medusa";
 
 export type ProductPreviewType = {
   id: string
@@ -20,3 +20,10 @@ export type CalculatedVariant = ProductVariant & {
   calculated_price_type: "sale" | "default";
   original_price: number;
 };
+
+export type CartWithCheckoutStep = Omit<
+  Cart,
+  "beforeInsert" | "beforeUpdate" | "afterUpdateOrLoad"
+> & {
+  checkout_step: "address" | "delivery" | "payment"
+}

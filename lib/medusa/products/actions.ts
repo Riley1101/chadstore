@@ -1,11 +1,15 @@
+
 import type {
-  Product,
-  ProductCollection,
+    ProductCollection,
   StoreGetProductsParams,
 } from "@medusajs/medusa";
-import { medusaClient } from "./medusa/config";
+
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 import { getRegions } from "@/app/actions";
-import { transformProductPreview } from "./medusa/transform-products-preview";
+import { ProductPreviewType } from "../types";
+import { medusaClient } from "../config";
+import { transformProductPreview } from "../transform-products-preview";
+import { getMedusaHeaders } from "../utils";
 
 /**
  *  Empty response object for empty data
@@ -17,7 +21,7 @@ const emptyResponse = {
 
 interface StoreResponse {
   response: {
-    products: Product[];
+    products: ProductPreviewType[];
     count: number;
   };
   nextPage: number | null;
@@ -40,7 +44,6 @@ export async function getCollectionList(
   const count = collections.length;
   return { collections, count };
 }
-
 export async function getProductsList({
   pageParam = 0,
   queryParams,
@@ -84,4 +87,20 @@ export async function getProductsList({
     nextPage,
     queryParams,
   };
+}
+
+
+export async function getProductByHandle(
+  handle: string,
+): Promise<{ product: PricedProduct}> {
+  const headers = await getMedusaHeaders();
+
+  const product = await medusaClient.products
+    .list({ handle }, headers)
+    .then(({ products }) => products[0])
+    .catch((err) => {
+      throw err;
+    });
+
+  return { product };
 }
