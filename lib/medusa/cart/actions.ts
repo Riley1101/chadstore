@@ -1,3 +1,4 @@
+"use server"
 import { getRegions } from "@/app/actions";
 import { cookies } from "next/headers";
 import { getMedusaHeaders } from "../utils";

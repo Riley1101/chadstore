@@ -1,6 +1,6 @@
 import { Region } from "@medusajs/medusa";
-import { isEmpty } from "../isEmpty";
 import { noDivisionCurrencies } from "./constants";
+import { isEmpty } from "../utils";
 
 export type RegionInfo = Pick<
   Region,
