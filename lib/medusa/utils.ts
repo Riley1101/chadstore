@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { medusaClient } from "./config";
 import { Region } from "@medusajs/medusa";
 import { cookies } from "next/headers";
@@ -33,5 +33,11 @@ export async function getMedusaHeaders(tags: string[] = []) {
   return headers;
 }
 
-export const onlyUnique = (value: unknown, index: number, self: unknown[]) =>
-  self.indexOf(value) === index
+export async function getCustomer() {
+  const headers = getMedusaHeaders(["customer"]);
+
+  return medusaClient.customers
+    .retrieve(headers)
+    .then(({ customer }) => customer)
+    .catch((err) => null);
+}

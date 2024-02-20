@@ -1,11 +1,13 @@
-"use server"
+"use server";
 import { getRegions } from "@/app/actions";
 import { cookies } from "next/headers";
+import { omit } from "lodash";
 import { getMedusaHeaders } from "../utils";
 import { medusaClient } from "../config";
 import { StorePostCartReq } from "@medusajs/medusa/dist/api";
 import { revalidateTag } from "next/cache";
-import { LineItem } from "@medusajs/medusa/dist/models";
+import { Cart, LineItem } from "@medusajs/medusa/dist/models";
+import { getProductsById } from "../products/actions";
 
 const CART_RESPONSE = {
   NO_CARTID: "missingCart",
@@ -134,10 +136,9 @@ export async function addToCart({
   }
 }
 
-
 export async function enrichLineItems(
   lineItems: LineItem[],
-  regionId: string
+  regionId: string,
 ): Promise<
   | Omit<LineItem, "beforeInsert" | "beforeUpdate" | "afterUpdateOrLoad">[]
   | undefined
@@ -146,25 +147,25 @@ export async function enrichLineItems(
   const queryParams = {
     ids: lineItems.map((lineItem) => lineItem.variant.product_id),
     regionId: regionId,
-  }
+  };
 
   // Fetch products by their IDs
-  const products = await getProductsById(queryParams)
+  const products = await getProductsById(queryParams);
 
   // If there are no line items or products, return an empty array
   if (!lineItems?.length || !products) {
-    return []
+    return [];
   }
 
   // Enrich line items with product and variant information
 
   const enrichedItems = lineItems.map((item) => {
-    const product = products.find((p) => p.id === item.variant.product_id)
-    const variant = product?.variants.find((v) => v.id === item.variant_id)
+    const product = products.find((p) => p.id === item.variant.product_id);
+    const variant = product?.variants.find((v) => v.id === item.variant_id);
 
     // If product or variant is not found, return the original item
     if (!product || !variant) {
-      return item
+      return item;
     }
 
     // If product and variant are found, enrich the item
@@ -174,9 +175,20 @@ export async function enrichLineItems(
         ...variant,
         product: omit(product, "variants"),
       },
-    }
-  }) as LineItem[]
+    };
+  }) as LineItem[];
 
-  return enrichedItems
+  return enrichedItems;
 }
 
+export async function getCheckoutStep(
+  cart: Omit<Cart, "beforeInsert" | "beforeUpdate" | "afterUpdateOrLoad">
+) {
+  if (!cart?.shipping_address?.address_1 || !cart.email) {
+    return "address"
+  } else if (cart?.shipping_methods.length === 0) {
+    return "delivery"
+  } else {
+    return "payment"
+  }
+}

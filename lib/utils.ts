@@ -32,3 +32,6 @@ export function isEqual(obj1: any, obj2: any): boolean {
   }
   return true;
 }
+
+export const onlyUnique = (value: unknown, index: number, self: unknown[]) =>
+  self.indexOf(value) === index

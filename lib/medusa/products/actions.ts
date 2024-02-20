@@ -1,6 +1,5 @@
-
 import type {
-    ProductCollection,
+  ProductCollection,
   StoreGetProductsParams,
 } from "@medusajs/medusa";
 
@@ -89,10 +88,9 @@ export async function getProductsList({
   };
 }
 
-
 export async function getProductByHandle(
   handle: string,
-): Promise<{ product: PricedProduct}> {
+): Promise<{ product: PricedProduct }> {
   const headers = await getMedusaHeaders();
 
   const product = await medusaClient.products
@@ -103,4 +101,22 @@ export async function getProductByHandle(
     });
 
   return { product };
+}
+
+export async function getProductsById({
+  ids,
+  regionId,
+}: {
+  ids: string[];
+  regionId: string;
+}) {
+  const headers = getMedusaHeaders(["products"]);
+
+  return medusaClient.products
+    .list({ id: ids, region_id: regionId }, headers)
+    .then(({ products }) => products)
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 }
