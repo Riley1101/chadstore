@@ -11,10 +11,16 @@
   "dependencies": {
     "@medusajs/medusa": "^1.20.2",
     "@medusajs/medusa-js": "^6.1.7",
+    "@radix-ui/react-toggle": "^1.0.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.351.0",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@medusajs/types": "^1.11.13",
@@ -28,5 +34,20 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a Next.js Application with Shadcn and Medusa integration",
+  "main": "postcss.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Riley1101/chadstore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Riley1101/chadstore/issues"
+  },
+  "homepage": "https://github.com/Riley1101/chadstore#readme"
 }
