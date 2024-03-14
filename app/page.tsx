@@ -13,29 +13,29 @@ export default async function Home() {
   return <main className="">
     <Navbar title="Eshmi" links={["Home", "About", "Products", "Contact"]} />
     {/* banner img */}
-    <section className="hero grid content-center h-[20em] lg:h-[25em] 2xl:h-[30em]">
-      <div className="w-[80%] lg:w-[70%] 2xl:w-[60%] m-auto flex flex-col gap-3 items-start  ">
-        <h1 className="text-4xl text-center font-bold">Welcome to Eshmi</h1>
-        	<Button>See Our Menus</Button></div>
+    <section className="hero grid content-center h-[80vh]">
+      <div className="w-[90%] 2xl:w-[78%] m-auto flex flex-col gap-3 items-start  ">
+        <h1 className="text-7xl text-center font-bold uppercase tracking-tight">Sale</h1>
+        	<Button size={'lg'}>See Our Menus</Button></div>
     </section>
     {/* sliders and tags */}
-    <section className="py-[2em]">
+    <section className="py-[4em]">
       {/* tags */}
-        <div className="w-[80%] lg:w-[70%] 2xl:w-[60%] m-auto py-5 border-b-[1px] border-solid border-gray-300">
+        <div className="w-[90%] 2xl:w-[78%] m-auto py-5 border-b-[1px] border-solid border-gray-300">
         <h4 className="font-semibold text-[15px]">Browse categories</h4>
          <div className="flex gap-3 py-2">
-         <Button variant={"secondary"} size={"xs"}>Japanese Cuisine</Button>
-         <Button variant={"secondary"} size={"xs"}>Korean Cuisine</Button>
-         <Button variant={"secondary"} size={"xs"}>Asian Cuisine</Button>
-         <Button variant={"secondary"} size={"xs"}>Taiwan Cuisine</Button>
+         <Button variant={"secondary"}>Japanese Cuisine</Button>
+         <Button variant={"secondary"}>Korean Cuisine</Button>
+         <Button variant={"secondary"}>Asian Cuisine</Button>
+         <Button variant={"secondary"}>Taiwan Cuisine</Button>
          </div>
         </div>
         {/* slider 1 */}
-        <div className="w-[80%] lg:w-[70%] 2xl:w-[60%] m-auto py-[2em] border-b-[1px] border-solid border-gray-300">
+        <div className="w-[90%] 2xl:w-[78%] m-auto py-[4em] border-b-[1px] border-solid border-gray-300">
         <div className="flex justify-between">
-            <div className="grid gap-1"><h4 className="font-semibold text-[15px]">Popular Menus</h4>
+            <div className="grid gap-1"><h4 className="font-semibold text-lg">Popular Menus</h4>
             <p className="text-[15px]">The most ordered menus can be found here</p></div>
-          <Button variant={"secondary"} size={"xs"}>View all</Button></div>
+          <Button variant={"secondary"}>View all</Button></div>
           <div className="pt-5">
           <Carousel
             opts={{
@@ -79,11 +79,11 @@ export default async function Home() {
           </div>
         </div>
           {/* slider 2 */}
-          <div className="w-[80%] lg:w-[70%] 2xl:w-[60%] m-auto py-[2em]">
+          <div className="w-[90%] 2xl:w-[78%] m-auto py-[4em]">
         <div className="flex justify-between">
             <div className="grid gap-1"><h4 className="font-semibold text-[15px]">Japanese Cuisines</h4>
             <p className="text-[15px]">Fresh Japanese home cooking recipes</p></div>
-          <Button variant={"secondary"} size={"xs"}>View all</Button></div>
+          <Button variant={"secondary"}>View all</Button></div>
           <div className="pt-5">
           <Carousel
             opts={{
@@ -129,21 +129,21 @@ export default async function Home() {
     </section>
     {/* footer */}
     <section className="w-[95%] m-auto">
-      <div className="border-b-[1px] border-solid border-gray-300 grid grid-cols-3 py-[3em]">
+      <div className="border-b-[1px] border-solid border-gray-300 grid grid-cols-3 py-[4em]">
         <div className="">
-          <h3 className="text-lg uppercase font-extrabold tracking-widest pb-2">Eshimi</h3>
-          <ul className="text-sm 2xl:text-md">
+          <h3 className="text-4xl uppercase font-extrabold tracking-widest pb-2">Eshimi</h3>
+          <ul className=" 2xl:text-md">
             <li>eshimi@gmail.com</li>
             <li>+1234567890</li>
             <li>Main St.10, EAC2CQ, USA</li>
           </ul>
         </div>
         <div className="grid gap-2">
-          <div className="text-sm 2xl:text-md"><h3 className="font-bold">About Us</h3>
+          <div className=" 2xl:text-md"><h3 className="font-semibold">About Us</h3>
           <ul>
             <li>Blogs</li>
           </ul></div>
-          <div className="text-sm 2xl:text-md"><h3 className="font-bold">Shop</h3>
+          <div className=" 2xl:text-md"><h3 className="font-semibold">Shop</h3>
           <ul>
             <li>Plants</li>
             <li>Kitchen</li>
@@ -151,7 +151,7 @@ export default async function Home() {
           </ul></div>
         </div>
       </div>
-      <div className="flex justify-between text-sm 2xl:text-md py-[1em]">
+      <div className="flex justify-between  2xl:text-md py-[1.5em]">
         <div>Powered by <u>Nawphire Developer Team</u></div>
         <div>Copyright by Eshimi &#169; 2023</div>
       </div>

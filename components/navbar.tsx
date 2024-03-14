@@ -8,11 +8,11 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ title, links }) => {
   return (
   <div>
-      <nav className="flex justify-between w-[80%] lg:w-[70%] 2xl:w-[60%] m-auto h-[4em] lg:h-[4em] 2xl:h-[5em]">
+      <nav className="flex justify-between w-[95%] 2xl:w-[80%] m-auto h-[4.5em] 2xl:h-[5em]">
         <div className="flex  items-center gap-[3em]">
-        <h1>{title}</h1>
+        <h1 className="uppercase tracking-widest text-3xl font-bold">{title}</h1>
         <div className=" py-2 px-4 rounded-full bg-gray-100 flex ">
-            <input type="text" placeholder="Search" className="bg-transparent border-none focus:outline-none text-sm italic" />
+            <input type="text" placeholder="Search" className="bg-transparent border-none focus:outline-none text-sm italic w-[18em] h-6" />
             <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 2xl:w-6 2xl:h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -20,9 +20,9 @@ export const Navbar: React.FC<NavbarProps> = ({ title, links }) => {
 
             </div>
         </div>
-      <ul className="flex gap-5 items-center ">
+      <ul className="flex gap-6 items-center ">
         {links.map((link, index) => (
-          <li className="text-sm" key={index}>{link}</li>
+          <li className="text-md" key={index}>{link}</li>
         ))}
       </ul>
         </div>
