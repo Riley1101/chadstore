@@ -33,7 +33,7 @@ export default async function Home() {
         {/* slider 1 */}
         <div className="w-[90%] 2xl:w-[78%] m-auto py-[4em] border-b-[1px] border-solid border-gray-300">
         <div className="flex justify-between">
-            <div className="grid gap-1"><h4 className="font-semibold text-lg">Popular Menus</h4>
+            <div className="grid gap-1"><h4 className="font-bold text-lg">Popular Menus</h4>
             <p className="text-[15px]">The most ordered menus can be found here</p></div>
           <Button variant={"secondary"}>View all</Button></div>
           <div className="pt-5">
@@ -81,7 +81,7 @@ export default async function Home() {
           {/* slider 2 */}
           <div className="w-[90%] 2xl:w-[78%] m-auto py-[4em]">
         <div className="flex justify-between">
-            <div className="grid gap-1"><h4 className="font-semibold text-[15px]">Japanese Cuisines</h4>
+            <div className="grid gap-1"><h4 className="font-bold text-lg">Japanese Cuisines</h4>
             <p className="text-[15px]">Fresh Japanese home cooking recipes</p></div>
           <Button variant={"secondary"}>View all</Button></div>
           <div className="pt-5">
