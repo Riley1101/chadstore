@@ -132,18 +132,18 @@ export default async function Home() {
       <div className="border-b-[1px] border-solid border-gray-300 grid grid-cols-3 py-[3em]">
         <div className="">
           <h3 className="text-lg uppercase font-extrabold tracking-widest pb-2">Eshimi</h3>
-          <ul className="text-sm">
+          <ul className="text-sm 2xl:text-md">
             <li>eshimi@gmail.com</li>
             <li>+1234567890</li>
             <li>Main St.10, EAC2CQ, USA</li>
           </ul>
         </div>
         <div className="grid gap-2">
-          <div className="text-sm"><h3 className="font-bold">About Us</h3>
+          <div className="text-sm 2xl:text-md"><h3 className="font-bold">About Us</h3>
           <ul>
             <li>Blogs</li>
           </ul></div>
-          <div className="text-sm"><h3 className="font-bold">Shop</h3>
+          <div className="text-sm 2xl:text-md"><h3 className="font-bold">Shop</h3>
           <ul>
             <li>Plants</li>
             <li>Kitchen</li>
@@ -151,7 +151,7 @@ export default async function Home() {
           </ul></div>
         </div>
       </div>
-      <div className="flex justify-between text-sm py-[1em]">
+      <div className="flex justify-between text-sm 2xl:text-md py-[1em]">
         <div>Powered by <u>Nawphire Developer Team</u></div>
         <div>Copyright by Eshimi &#169; 2023</div>
       </div>
